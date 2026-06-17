@@ -1,70 +1,104 @@
-# Getting Started with Create React App
+# 🗺️ BugMap — AI-Powered Civic Issue Reporting Platform
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+BugMap is a full-stack web application that empowers citizens to report civic issues like potholes, garbage overflow, broken streetlights, and water leakage. It uses AI to generate formal complaint letters addressed to the correct municipal authorities.
 
-## Available Scripts
+## 🚀 Live Features
 
-In the project directory, you can run:
+- 📍 **Report civic issues** with GPS auto-detection and photo upload
+- 🗺️ **Interactive map** showing all reported issues across the city (OpenStreetMap + Leaflet.js)
+- 🤖 **AI Complaint Letter Generator** — generates formal letters to BBMP/BWSSB using Groq LLaMA API
+- ⬆️ **Community upvoting** — citizens upvote issues to increase priority
+- 🔄 **Status tracking** — Open → In Progress → Resolved
+- 🔐 **JWT Authentication** — secure register/login system
 
-### `npm start`
+## 🛠️ Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+| Layer | Technology |
+|-------|-----------|
+| Frontend | React.js, Leaflet.js, React Router |
+| Backend | Node.js, Express.js |
+| Database | PostgreSQL |
+| Authentication | JWT, bcryptjs |
+| AI | Groq API (LLaMA 3.3) |
+| Image Storage | Cloudinary |
+| Maps | OpenStreetMap + Leaflet.js |
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 📁 Project Structure
+bugmap/
 
-### `npm test`
+├── backend/
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+│   ├── config/        # DB and Cloudinary config
 
-### `npm run build`
+│   ├── controllers/   # Business logic
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+│   ├── middleware/    # JWT auth middleware
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+│   ├── routes/        # API routes
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+│   └── index.js       # Express server
 
-### `npm run eject`
+└── frontend/
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+└── src/
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+├── components/ # Navbar
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+├── context/    # Auth context
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+├── pages/      # Login, Register, Home, ReportIssue, IssueDetail
 
-## Learn More
+└── api.js      # API calls
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## ⚙️ Setup Instructions
 
-### Code Splitting
+### Backend
+```bash
+cd backend
+npm install
+# Create .env file with your credentials
+node index.js
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Frontend
+```bash
+cd frontend
+npm install
+npm start
+```
 
-### Analyzing the Bundle Size
+### Environment Variables (backend/.env)
+PORT=5000
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+DB_HOST=localhost
 
-### Making a Progressive Web App
+DB_PORT=5432
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+DB_NAME=bugmap
 
-### Advanced Configuration
+DB_USER=postgres
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+DB_PASSWORD=your_password
 
-### Deployment
+JWT_SECRET=your_secret
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+CLOUDINARY_CLOUD_NAME=your_cloud_name
 
-### `npm run build` fails to minify
+CLOUDINARY_API_KEY=your_key
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+CLOUDINARY_API_SECRET=your_secret
+
+GROQ_API_KEY=your_groq_key
+
+EMAIL_USER=your_email
+
+EMAIL_PASS=your_app_password
+
+## 🎯 Impact
+
+India loses billions annually to unaddressed civic infrastructure issues. BugMap gives citizens a voice and creates public accountability — showing exactly which areas have the most unresolved issues and for how long.
+
+## 👩‍💻 Developer
+
+Built by **Vishrutha M R** — 3rd year ISE student at Bangalore Institute of Technology
