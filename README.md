@@ -29,4 +29,4 @@ India loses billions annually to unaddressed civic infrastructure issues. BugMap
 
 ## 👩‍💻 Developer
 
-Built by **Vishrutha M R** — 3rd year ISE, Bangalore Institute of Technology
+Built by **Vishrutha M R** — ISE, Bangalore Institute of Technology
