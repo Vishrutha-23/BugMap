@@ -27,10 +27,16 @@ const reportIssue = async (req, res) => {
       [user_id, title, description, category, severity, latitude, longitude, image_url]
     );
 
-    res.status(201).json({
-      message: 'Issue reported successfully',
-      issue: newIssue.rows[0]
-    });
+    const issueData = newIssue.rows[0];
+
+// Emit real-time event to all connected clients
+const io = req.app.get('io');
+io.emit('newIssue', issueData);
+
+res.status(201).json({
+  message: 'Issue reported successfully',
+  issue: issueData
+});
 
   } catch (error) {
     console.error(error);

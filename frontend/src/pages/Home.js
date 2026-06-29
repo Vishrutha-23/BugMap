@@ -1,12 +1,12 @@
-
 import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { getAllIssues } from '../api';
 import Navbar from '../components/Navbar';
+import { io } from 'socket.io-client';
 
-// Fix default marker icon issue with React
+// Fix default marker icon
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
@@ -14,7 +14,6 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
 });
 
-// Custom colored markers based on status
 const getMarkerIcon = (status) => {
   const colors = {
     open: 'red',
@@ -35,9 +34,30 @@ const Home = () => {
   const [issues, setIssues] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState('all');
+  const [newIssueAlert, setNewIssueAlert] = useState(null);
 
   useEffect(() => {
     fetchIssues();
+
+    // Connect to Socket.io
+    const socket = io('http://localhost:5000');
+
+    socket.on('connect', () => {
+      console.log('Connected to Socket.io server');
+    });
+
+    // Listen for new issues
+    socket.on('newIssue', (issue) => {
+      console.log('New issue received:', issue);
+      setIssues(prev => [issue, ...prev]);
+      setNewIssueAlert(`New issue reported: ${issue.title}`);
+      setTimeout(() => setNewIssueAlert(null), 5000);
+    });
+
+    // Cleanup on unmount
+    return () => {
+      socket.disconnect();
+    };
   }, []);
 
   const fetchIssues = async () => {
@@ -57,6 +77,13 @@ const Home = () => {
   return (
     <div style={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
       <Navbar />
+
+      {/* Real-time Alert */}
+      {newIssueAlert && (
+        <div style={styles.alert}>
+          🔴 {newIssueAlert}
+        </div>
+      )}
 
       {/* Filter Bar */}
       <div style={styles.filterBar}>
@@ -123,6 +150,15 @@ const Home = () => {
 };
 
 const styles = {
+  alert: {
+    backgroundColor: '#dc3545',
+    color: 'white',
+    padding: '10px 20px',
+    textAlign: 'center',
+    fontWeight: '600',
+    fontSize: '14px',
+    animation: 'fadeIn 0.3s ease'
+  },
   filterBar: {
     display: 'flex', alignItems: 'center', gap: '10px',
     padding: '10px 20px', backgroundColor: 'white',
