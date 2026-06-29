@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -18,6 +17,7 @@ const Navbar = () => {
       <div style={styles.links}>
         {user ? (
           <>
+            <Link to="/analytics" style={styles.link}>📊 Analytics</Link>
             <Link to="/report" style={styles.link}>+ Report Issue</Link>
             <span style={styles.username}>👤 {user.name}</span>
             <button onClick={handleLogout} style={styles.logoutBtn}>Logout</button>

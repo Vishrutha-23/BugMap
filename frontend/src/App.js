@@ -5,6 +5,7 @@ import Register from './pages/Register';
 import Home from './pages/Home';
 import ReportIssue from './pages/ReportIssue';
 import IssueDetail from './pages/IssueDetail';
+import Analytics from './pages/Analytics';
 import { useAuth } from './context/AuthContext';
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/" element={user ? <Home /> : <Navigate to="/login" />} />
         <Route path="/report" element={user ? <ReportIssue /> : <Navigate to="/login" />} />
         <Route path="/issue/:id" element={user ? <IssueDetail /> : <Navigate to="/login" />} />
+        <Route path="/analytics" element={user ? <Analytics /> : <Navigate to="/login" />} />
       </Routes>
     </Router>
   );
