@@ -17,9 +17,10 @@ const IssueDetail = () => {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    fetchIssue();
-  }, [id]);
+ // eslint-disable-next-line react-hooks/exhaustive-deps
+useEffect(() => {
+  fetchIssue();
+}, [id]);
 
   const fetchIssue = async () => {
     try {
