@@ -40,7 +40,7 @@ const Home = () => {
     fetchIssues();
 
     // Connect to Socket.io
-    const socket = io('http://localhost:5000');
+    const socket = io('https://bugmap-backend.onrender.com');
 
     socket.on('connect', () => {
       console.log('Connected to Socket.io server');
