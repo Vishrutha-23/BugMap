@@ -25,7 +25,7 @@ app.set('io', io);
 
 // Middleware
 app.use(cors({
-  origin: '*',
+  origin: 'https://bug-map-eight.vercel.app',
   credentials: true
 }));
 app.use(express.json());
